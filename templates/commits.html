@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Commits</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h1>Informations sur les commits</h1>
+    <div id="chart_div"></div>
+
+    <script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('string', 'Date');
+            dataTable.addColumn('number', 'Minute');
+
+            $.getJSON('https://api.github.com/repos/fdvodkax/5MCSI_Metriques/commits', function(data) {
+                data.forEach(function(commit) {
+                    var date = commit.commit.author.date;
+                    $.getJSON('/extract-minutes/' + date, function(minutesData) {
+                        dataTable.addRow([date, minutesData.minutes]);
+                    });
+                });
+
+                var options = {
+                    title: 'Quantité de commits par minute',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(dataTable, options);
+            });
+        }
+    </script>
+</body>
+</html>
