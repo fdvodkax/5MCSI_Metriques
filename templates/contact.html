@@ -9,7 +9,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: #f9f9f9;
+            color: #333;
         }
 
         .container {
@@ -23,6 +24,8 @@
 
         h1 {
             text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
         }
 
         form {
@@ -36,14 +39,18 @@
         label {
             display: block;
             font-weight: bold;
+            color: #555;
         }
 
         input[type="text"],
+        input[type="email"],
         textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            color: #333;
+            margin-top: 5px;
         }
 
         button {
@@ -55,10 +62,19 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
             background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004080;
+        }
+
+        textarea {
+            resize: vertical;
         }
     </style>
 </head>
@@ -73,6 +89,14 @@
             <div class="form-group">
                 <label for="lastname">Nom:</label>
                 <input type="text" id="lastname" name="lastname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Téléphone:</label>
+                <input type="text" id="phone" name="phone">
             </div>
             <div class="form-group">
                 <label for="message">Message:</label>
